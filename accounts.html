@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Accounts – SecureTrust Bank</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body class="stb-body">
+  <header class="stb-topbar">
+    <div class="stb-logo-container">
+      <div class="stb-logo-mark">₹</div>
+      <div class="stb-logo-text">
+        <h1>SecureTrust</h1>
+        <p>Bank</p>
+      </div>
+    </div>
+    <nav class="stb-nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="transfers.html">Transfers</a>
+      <a href="cards.html">Cards</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <main class="stb-content-main">
+    <section class="stb-page-header">
+      <h1>My Accounts</h1>
+      <p>View and manage all your accounts</p>
+    </section>
+
+    <section id="attack-banner" class="stb-attack-banner stb-attack-normal">
+      <div>
+        <span id="attack-label">✓ Normal Activity</span>
+        <span id="attack-detail" class="stb-banner-detail">No suspicious transactions detected.</span>
+      </div>
+    </section>
+
+    <div class="stb-accounts-container">
+      <div class="stb-account-card">
+        <div class="stb-account-header">
+          <h3>Savings Account</h3>
+          <span class="stb-badge">Primary</span>
+        </div>
+        <div class="stb-account-details">
+          <p><strong>Account Number:</strong> 1234567890</p>
+          <p><strong>IFSC Code:</strong> STBK0001234</p>
+          <p><strong>Account Balance:</strong> ₹ 2,48,520.75</p>
+          <p><strong>Last Updated:</strong> Today, 8:45 AM</p>
+        </div>
+        <div class="stb-account-actions">
+          <button class="stb-btn-secondary" onclick="viewStatement()">View Statement</button>
+          <button class="stb-btn-secondary" onclick="downloadStatement()">Download</button>
+        </div>
+      </div>
+
+      <div class="stb-account-card">
+        <div class="stb-account-header">
+          <h3>Current Account</h3>
+          <span class="stb-badge-secondary">Business</span>
+        </div>
+        <div class="stb-account-details">
+          <p><strong>Account Number:</strong> 5678901234</p>
+          <p><strong>IFSC Code:</strong> STBK0005678</p>
+          <p><strong>Account Balance:</strong> ₹ 52,810.00</p>
+          <p><strong>Last Updated:</strong> Today, 8:45 AM</p>
+        </div>
+        <div class="stb-account-actions">
+          <button class="stb-btn-secondary" onclick="viewStatement()">View Statement</button>
+          <button class="stb-btn-secondary" onclick="downloadStatement()">Download</button>
+        </div>
+      </div>
+
+      <div class="stb-account-card">
+        <div class="stb-account-header">
+          <h3>Savings Account</h3>
+          <span class="stb-badge">Linked</span>
+        </div>
+        <div class="stb-account-details">
+          <p><strong>Account Number:</strong> 9012345678</p>
+          <p><strong>IFSC Code:</strong> STBK0009012</p>
+          <p><strong>Account Balance:</strong> ₹ 18,450.25</p>
+          <p><strong>Last Updated:</strong> Today, 8:45 AM</p>
+        </div>
+        <div class="stb-account-actions">
+          <button class="stb-btn-secondary" onclick="viewStatement()">View Statement</button>
+          <button class="stb-btn-secondary" onclick="downloadStatement()">Download</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="stb-footer">
+    <div class="stb-footer-inner">
+      <ul class="stb-footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <p>© 2026 SecureTrust Bank Ltd. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function viewStatement() { alert("Statement view"); }
+    function downloadStatement() { alert("Statement downloaded"); }
+  </script>
+</body>
+</html>

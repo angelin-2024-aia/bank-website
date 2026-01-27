@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SecureTrust Bank – Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="stb-body">
+  <!-- security banner -->
+  <div id="attack-banner" class="stb-banner stb-banner-normal">
+    <span id="attack-status">Status: Normal – No attacks detected</span>
+    <span id="lock-icon">🔓</span>
+  </div>
+
+  <div class="stb-dashboard-container">
+    <h1>SecureTrust Bank Dashboard</h1>
+
+    <!-- account summary -->
+    <div class="stb-cards-row" id="accounts-row">
+      <!-- JS will fill account cards -->
+    </div>
+
+    <!-- recent transactions -->
+    <div class="stb-card">
+      <h2>Recent Transactions</h2>
+      <table class="stb-table" id="txn-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS will insert rows -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- transfer -->
+    <div class="stb-transfer-card">
+      <h2>Fund Transfer</h2>
+      <form id="transfer-form">
+        <label for="beneficiary">Beneficiary Name</label>
+        <input type="text" id="beneficiary" required>
+
+        <label for="account-number">Account Number</label>
+        <input type="text" id="account-number" required>
+
+        <label for="ifsc">IFSC Code</label>
+        <input type="text" id="ifsc" required>
+
+        <label for="amount">Amount (₹)</label>
+        <input type="number" id="amount" required>
+
+        <button type="submit" id="transfer-btn">Transfer</button>
+      </form>
+      <p id="transfer-msg" class="stb-info" style="display:none;"></p>
+    </div>
+
+    <!-- mini stats -->
+    <div class="stb-stats-card">
+      <h3>Attack Stats</h3>
+      <p id="stat-attacks">Attacks: 0</p>
+      <p id="stat-type">Type: normal</p>
+      <p id="stat-anomaly">Anomaly: NO</p>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact SecureTrust Bank</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="stb-body">
+  <header class="stb-topbar">
+    <div class="stb-logo-container">
+      <div class="stb-logo-mark">₹</div>
+      <div class="stb-logo-text">
+        <h1>SecureTrust</h1>
+        <p>Bank</p>
+      </div>
+    </div>
+    <nav class="stb-nav">
+      <a href="home.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="index.html">Login</a>
+    </nav>
+  </header>
+
+  <main class="stb-content-main">
+    <section class="stb-page-header">
+      <h1>Contact Us</h1>
+      <p>We're here to help. Reach out to our support team.</p>
+    </section>
+
+    <section class="stb-contact-grid">
+      <div class="stb-contact-form">
+        <h2>Send us a Message</h2>
+        <form class="stb-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <input type="text" placeholder="Subject" required />
+          <textarea placeholder="Message..." rows="5" required></textarea>
+          <button type="submit" class="stb-btn-primary">Send</button>
+        </form>
+      </div>
+
+      <div class="stb-contact-info">
+        <h2>Get in Touch</h2>
+        <div class="stb-contact-item">
+          <strong>📞 Phone</strong>
+          <p>1800-BANK-001 (Toll Free)</p>
+        </div>
+        <div class="stb-contact-item">
+          <strong>📧 Email</strong>
+          <p>support@securetrust.bank.in</p>
+        </div>
+        <div class="stb-contact-item">
+          <strong>📍 Headquarters</strong>
+          <p>123 Financial Avenue, Mumbai, India</p>
+        </div>
+        <div class="stb-contact-item">
+          <strong>⏰ Hours</strong>
+          <p>24/7 Customer Support</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="stb-footer">
+    <div class="stb-footer-inner">
+      <ul class="stb-footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <p>© 2026 SecureTrust Bank Ltd. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector(".stb-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Thank you for reaching out. We'll respond within 24 hours.");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

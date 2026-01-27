@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fund Transfers – SecureTrust Bank</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body class="stb-body">
+  <header class="stb-topbar">
+    <div class="stb-logo-container">
+      <div class="stb-logo-mark">₹</div>
+      <div class="stb-logo-text">
+        <h1>SecureTrust</h1>
+        <p>Bank</p>
+      </div>
+    </div>
+    <nav class="stb-nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="transfers.html">Transfers</a>
+      <a href="cards.html">Cards</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <main class="stb-content-main">
+    <section class="stb-page-header">
+      <h1>Fund Transfers</h1>
+      <p>Send money safely to beneficiaries</p>
+    </section>
+
+    <section id="attack-banner" class="stb-attack-banner stb-attack-normal">
+      <div>
+        <span id="attack-label">✓ Secure Connection</span>
+        <span id="attack-detail" class="stb-banner-detail">All transfers are encrypted and monitored.</span>
+      </div>
+    </section>
+
+    <div class="stb-transfer-container">
+      <div class="stb-card">
+        <h2>New Fund Transfer</h2>
+        <form class="stb-form" onsubmit="handleTransfer(event)">
+          <div class="stb-form-group">
+            <label>From Account <span class="stb-required">*</span></label>
+            <select required>
+              <option>Select Account</option>
+              <option>Savings - 1234567890</option>
+              <option>Current - 5678901234</option>
+            </select>
+          </div>
+
+          <div class="stb-form-group">
+            <label>Beneficiary <span class="stb-required">*</span></label>
+            <select required>
+              <option>Select Beneficiary</option>
+              <option>Raj Kumar (STBK0001111)</option>
+              <option>Priya Singh (STBK0002222)</option>
+            </select>
+          </div>
+
+          <div class="stb-form-group">
+            <label>Amount <span class="stb-required">*</span></label>
+            <input type="number" placeholder="₹ Enter amount" required />
+          </div>
+
+          <div class="stb-form-group">
+            <label>Purpose of Transfer</label>
+            <select>
+              <option>Select Purpose</option>
+              <option>Personal</option>
+              <option>Business</option>
+              <option>Bill Payment</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="stb-form-group">
+            <label>Reference/Note</label>
+            <textarea placeholder="Optional note" rows="3"></textarea>
+          </div>
+
+          <button type="submit" class="stb-btn-primary">Proceed to Confirmation</button>
+        </form>
+      </div>
+
+      <div class="stb-card">
+        <h2>Recent Transfers</h2>
+        <table class="stb-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Beneficiary</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>04 Jan</td>
+              <td>Raj Kumar</td>
+              <td>₹ 5,000</td>
+              <td><span class="stb-pill success">Completed</span></td>
+            </tr>
+            <tr>
+              <td>03 Jan</td>
+              <td>Priya Singh</td>
+              <td>₹ 10,000</td>
+              <td><span class="stb-pill success">Completed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="stb-footer">
+    <div class="stb-footer-inner">
+      <ul class="stb-footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+      </ul>
+      <p>© 2026 SecureTrust Bank Ltd. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function handleTransfer(e) {
+      e.preventDefault();
+      alert("Transfer initiated. OTP will be sent to your registered mobile.");
+    }
+  </script>
+</body>
+</html>

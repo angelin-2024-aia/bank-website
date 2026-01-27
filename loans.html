@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loans & Credit – SecureTrust Bank</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="stb-body">
+  <header class="stb-topbar">
+    <div class="stb-logo-container">
+      <div class="stb-logo-mark">₹</div>
+      <div class="stb-logo-text">
+        <h1>SecureTrust</h1>
+        <p>Bank</p>
+      </div>
+    </div>
+    <nav class="stb-nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="transfers.html">Transfers</a>
+      <a href="cards.html">Cards</a>
+      <a href="loans.html">Loans</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <main class="stb-content-main">
+    <section class="stb-page-header">
+      <h1>Loans & Credit</h1>
+      <p>Flexible borrowing options for your needs</p>
+    </section>
+
+    <div class="stb-loans-container">
+      <div class="stb-card">
+        <h2>Active Loans</h2>
+        <table class="stb-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Outstanding</th>
+              <th>EMI</th>
+              <th>Next Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Personal Loan</td>
+              <td>₹ 3,00,000</td>
+              <td>₹ 1,85,000</td>
+              <td>₹ 12,500</td>
+              <td>15 Jan 2026</td>
+            </tr>
+            <tr>
+              <td>Home Loan</td>
+              <td>₹ 40,00,000</td>
+              <td>₹ 35,00,000</td>
+              <td>₹ 32,000</td>
+              <td>20 Jan 2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stb-card">
+        <h2>Loan Products</h2>
+        <div class="stb-loans-grid">
+          <div class="stb-loan-card">
+            <h3>Personal Loan</h3>
+            <p>Up to ₹ 10 lakhs</p>
+            <p><strong>Rate:</strong> 8.5% p.a.</p>
+            <button class="stb-btn-secondary">Apply Now</button>
+          </div>
+          <div class="stb-loan-card">
+            <h3>Home Loan</h3>
+            <p>Up to ₹ 1 crore</p>
+            <p><strong>Rate:</strong> 7.2% p.a.</p>
+            <button class="stb-btn-secondary">Apply Now</button>
+          </div>
+          <div class="stb-loan-card">
+            <h3>Auto Loan</h3>
+            <p>Up to 90% on vehicle</p>
+            <p><strong>Rate:</strong> 7.8% p.a.</p>
+            <button class="stb-btn-secondary">Apply Now</button>
+          </div>
+          <div class="stb-loan-card">
+            <h3>Education Loan</h3>
+            <p>Up to ₹ 20 lakhs</p>
+            <p><strong>Rate:</strong> 6.5% p.a.</p>
+            <button class="stb-btn-secondary">Apply Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="stb-footer">
+    <div class="stb-footer-inner">
+      <ul class="stb-footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+      </ul>
+      <p>© 2026 SecureTrust Bank Ltd. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <style>
+    .stb-loans-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .stb-loan-card {
+      background: #f5f7fa;
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stb-loan-card h3 {
+      margin-bottom: 8px;
+      color: #0052a3;
+    }
+
+    .stb-loan-card p {
+      font-size: 0.9rem;
+      margin: 4px 0;
+    }
+
+    .stb-loan-card button {
+      margin-top: 12px;
+      width: 100%;
+    }
+  </style>
+</body>
+</html>

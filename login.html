@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Bank Portal - STB</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/app.js" defer></script>
+</head>
+<body class="stb-login-bg">
+  <!-- TOPBAR -->
+  <div class="stb-topbar">
+    <div class="stb-logo-container">
+      <div class="stb-logo-mark">₹</div>
+      <div class="stb-logo-text">
+        <h1>STB Bank</h1>
+        <p>Secure Trust Banking</p>
+      </div>
+    </div>
+    <nav class="stb-nav">
+      <a href="#login-section">Login</a>
+      <a href="#dashboard-section">Dashboard</a>
+      <a href="#transfer-section">Transfers</a>
+      <a href="#security">Security</a>
+    </nav>
+  </div>
+
+  <!-- MAIN -->
+  <main class="stb-main">
+    <div class="stb-container">
+      <!-- LEFT INFO PANEL -->
+      <div class="stb-info-panel" id="security">
+        <div class="stb-info-header">
+          <h2>Welcome to STB Bank</h2>
+          <p>Your trusted digital banking partner since 2010</p>
+        </div>
+
+        <ul class="stb-info-list">
+          <li>
+            <span class="stb-icon">🔒</span>
+            <div>
+              <strong>Military-Grade Security</strong>
+              <p>256-bit SSL encryption protecting all transactions</p>
+            </div>
+          </li>
+          <li>
+            <span class="stb-icon">⚡</span>
+            <div>
+              <strong>Instant Transfers</strong>
+              <p>Real-time fund transfers to any bank account</p>
+            </div>
+          </li>
+          <li>
+            <span class="stb-icon">📱</span>
+            <div>
+              <strong>24/7 Mobile Banking</strong>
+              <p>Access your accounts anytime, anywhere</p>
+            </div>
+          </li>
+          <li>
+            <span class="stb-icon">🎯</span>
+            <div>
+              <strong>Zero Hidden Charges</strong>
+              <p>Transparent pricing with no surprises</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="stb-security-info">
+          <h3>🛡️ Safety First</h3>
+          <p>
+            We follow standard security best practices and multi-factor authentication to protect your data.
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: LOGIN / DASHBOARD / TRANSFER -->
+      <div class="stb-login-card">
+        <!-- LOGIN SECTION -->
+        <section id="login-section">
+          <div class="stb-card-header">
+            <h2>Login</h2>
+            <p>Sign in to your account securely</p>
+          </div>
+
+          <form class="stb-form" id="loginForm" novalidate>
+            <!-- USER ID -->
+            <div class="stb-form-group">
+              <label for="userId">User ID <span class="stb-required">*</span></label>
+              <input
+                type="text"
+                id="userId"
+                name="userId"
+                placeholder="Enter your User ID"
+                required
+              />
+              <small>Try: angel, keerthu</small>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="stb-form-group">
+              <label for="password">Password <span class="stb-required">*</span></label>
+              <div class="stb-password-wrapper">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  required
+                />
+                <button type="button" class="stb-pwd-toggle" onclick="togglePassword()">👁️</button>
+              </div>
+              <small>Try: angel123, keerthu123</small>
+            </div>
+
+            <!-- CAPTCHA -->
+            <div class="stb-form-group">
+              <label for="captcha">Security Code <span class="stb-required">*</span></label>
+              <div class="stb-captcha">
+                <div class="stb-captcha-text" id="captchaText">7X2K9</div>
+                <button type="button" class="stb-captcha-btn" onclick="refreshCaptcha()">🔄</button>
+                <input
+                  type="text"
+                  id="captcha"
+                  name="captcha"
+                  placeholder="Enter code"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- REMEMBER DEVICE -->
+            <div class="stb-form-group">
+              <label class="stb-remember-device">
+                <input type="checkbox" id="rememberDevice" name="rememberDevice" />
+                <span>Trust this device for 30 days</span>
+              </label>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" class="stb-btn-primary">LOGIN SECURELY</button>
+
+            <!-- FORM OPTIONS -->
+            <div class="stb-form-options">
+              <a href="#forgot">Forgot Password?</a>
+              <span>•</span>
+              <a href="#forgot">Forgot User ID?</a>
+            </div>
+
+            <!-- NEW USER -->
+            <div class="stb-new-user">
+              New to STB Bank? <a href="#register">Register here</a>
+            </div>
+          </form>
+
+          <!-- SECURITY WARNING -->
+          <div class="stb-warning-box">
+            <strong>⚠️ Security Alert</strong>
+            <ul>
+              <li>Never share your password or OTP with anyone.</li>
+              <li>Check browser security lock icon before login.</li>
+              <li>Always type bank URL manually in the address bar.</li>
+              <li>Logout properly after banking.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboard-section" style="display:none;">
+          <div class="stb-card-header">
+            <h2>Account Dashboard</h2>
+            <p>Overview of your STB Bank accounts</p>
+          </div>
+
+          <div id="security-banner" class="banner banner-normal">
+            <h3 id="security-title">All Systems Normal</h3>
+            <p id="security-message">No suspicious activity detected.</p>
+          </div>
+
+          <div class="stb-accounts-container">
+            <div class="stb-account-card">
+              <div class="stb-account-header">
+                <div>
+                  <h3>Savings Account</h3>
+                  <p>XXXX XXXX 1234</p>
+                </div>
+                <span class="stb-badge">Primary</span>
+              </div>
+              <div class="stb-account-details">
+                <p>Available Balance: <strong>₹ 1,25,000.00</strong></p>
+                <p>Branch: Chennai Main</p>
+              </div>
+            </div>
+
+            <div class="stb-account-card">
+              <div class="stb-account-header">
+                <div>
+                  <h3>Current Account</h3>
+                  <p>XXXX XXXX 5678</p>
+                </div>
+                <span class="stb-badge-secondary">Business</span>
+              </div>
+              <div class="stb-account-details">
+                <p>Available Balance: <strong>₹ 2,75,300.00</strong></p>
+                <p>Branch: Nungambakkam</p>
+              </div>
+            </div>
+
+            <div class="stb-account-card">
+              <div class="stb-account-header">
+                <div>
+                  <h3>Credit Card</h3>
+                  <p>XXXX XXXX 9012</p>
+                </div>
+                <span class="stb-badge-secondary">VISA</span>
+              </div>
+              <div class="stb-account-details">
+                <p>Outstanding: <strong>₹ 18,450.00</strong></p>
+                <p>Limit: ₹ 1,00,000.00</p>
+              </div>
+            </div>
+          </div>
+
+          <button id="go-transfer" class="stb-btn-secondary" style="margin-top:16px;">
+            Go to Fund Transfer
+          </button>
+        </section>
+
+        <!-- TRANSFER SECTION -->
+        <section id="transfer-section" style="display:none;">
+          <div class="stb-card-header">
+            <h2>Fund Transfer</h2>
+            <p>Transfer funds securely to any Indian bank</p>
+          </div>
+
+          <form id="transfer-form" class="stb-form" novalidate>
+            <div class="stb-form-group">
+              <label for="ben-name">Beneficiary Name</label>
+              <input type="text" id="ben-name" name="ben-name" required />
+            </div>
+
+            <div class="stb-form-group">
+              <label for="ben-account">Account Number</label>
+              <input type="text" id="ben-account" name="ben-account" required />
+            </div>
+
+            <div class="stb-form-group">
+              <label for="ben-ifsc">IFSC Code</label>
+              <input type="text" id="ben-ifsc" name="ben-ifsc" required />
+            </div>
+
+            <div class="stb-form-group">
+              <label for="amount">Amount (₹)</label>
+              <input type="number" id="amount" name="amount" required min="1" />
+            </div>
+
+            <div class="stb-form-group">
+              <label for="remarks">Remarks</label>
+              <input type="text" id="remarks" name="remarks" />
+            </div>
+
+            <button type="submit" class="stb-btn-primary">Submit Transfer</button>
+            <button type="button" id="back-dashboard" class="stb-btn-secondary">
+              Back to Dashboard
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="stb-footer">
+    <div class="stb-footer-inner">
+      <ul class="stb-footer-links">
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="#terms">Terms of Service</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#careers">Careers</a></li>
+      </ul>
+      <p>&copy; 2024 STB Bank. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const toggleBtn = document.querySelector('.stb-pwd-toggle');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleBtn.textContent = '🙈';
+      } else {
+        passwordInput.type = 'password';
+        toggleBtn.textContent = '👁️';
+      }
+    }
+  </script>
+</body>
+</html>

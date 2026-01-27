@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Cards – SecureTrust Bank</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body class="stb-body">
+  <header class="stb-topbar">
+    <div class="stb-logo-container">
+      <div class="stb-logo-mark">₹</div>
+      <div class="stb-logo-text">
+        <h1>SecureTrust</h1>
+        <p>Bank</p>
+      </div>
+    </div>
+    <nav class="stb-nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="transfers.html">Transfers</a>
+      <a href="cards.html">Cards</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <main class="stb-content-main">
+    <section class="stb-page-header">
+      <h1>My Cards</h1>
+      <p>Manage your debit and credit cards</p>
+    </section>
+
+    <div class="stb-cards-grid">
+      <div class="stb-card-display">
+        <div class="stb-card-plastic">
+          <div class="stb-card-inner">
+            <p class="stb-card-label">SecureTrust</p>
+            <p class="stb-card-number">•••• •••• •••• 4532</p>
+            <div class="stb-card-footer">
+              <p>ANGEL KUMAR</p>
+              <p>05/28</p>
+            </div>
+          </div>
+        </div>
+        <div class="stb-card-details">
+          <h3>Debit Card</h3>
+          <p><strong>Card Type:</strong> Debit (Savings Account)</p>
+          <p><strong>Status:</strong> <span class="stb-badge">Active</span></p>
+          <p><strong>CVV:</strong> ••• (Not displayed)</p>
+          <p><strong>Expiry:</strong> 05/2028</p>
+          <div class="stb-card-actions">
+            <button class="stb-btn-secondary">Block Card</button>
+            <button class="stb-btn-secondary">Set Limits</button>
+            <button class="stb-btn-secondary">View Transactions</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stb-card-display">
+        <div class="stb-card-plastic stb-card-credit">
+          <div class="stb-card-inner">
+            <p class="stb-card-label">SecureTrust</p>
+            <p class="stb-card-number">•••• •••• •••• 8901</p>
+            <div class="stb-card-footer">
+              <p>ANGEL KUMAR</p>
+              <p>12/27</p>
+            </div>
+          </div>
+        </div>
+        <div class="stb-card-details">
+          <h3>Credit Card</h3>
+          <p><strong>Card Type:</strong> Credit</p>
+          <p><strong>Status:</strong> <span class="stb-badge">Active</span></p>
+          <p><strong>Limit:</strong> ₹ 80,000</p>
+          <p><strong>Outstanding:</strong> ₹ 20,480.35</p>
+          <div class="stb-card-actions">
+            <button class="stb-btn-secondary">Pay Bill</button>
+            <button class="stb-btn-secondary">View Statement</button>
+            <button class="stb-btn-secondary">Increase Limit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="stb-footer">
+    <div class="stb-footer-inner">
+      <ul class="stb-footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+      </ul>
+      <p>© 2026 SecureTrust Bank Ltd. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <style>
+    .stb-card-plastic {
+      background: linear-gradient(135deg, #1c7ed6, #4dabf7);
+      border-radius: 16px;
+      padding: 24px;
+      color: white;
+      min-width: 320px;
+      aspect-ratio: 16/10;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .stb-card-credit {
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      color: #000;
+    }
+
+    .stb-card-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .stb-card-label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .stb-card-number {
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      margin-top: 40px;
+    }
+
+    .stb-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stb-card-footer p {
+      margin: 0;
+      font-size: 0.85rem;
+    }
+
+    .stb-cards-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .stb-card-display {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .stb-card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+  </style>
+</body>
+</html>
