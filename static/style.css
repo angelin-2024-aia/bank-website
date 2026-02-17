@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --neon-green: #00ff9d;
+    --neon-blue: #00d4ff;
+    --bg-dark: #020617;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- Smooth Entrance Animation --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* --- Futuristic Header --- */
+header {
+    background: rgba(2, 6, 23, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green);
+    letter-spacing: 3px;
+}
+
+nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    transition: 0.3s;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--neon-green);
+    transition: 0.3s;
+}
+
+nav a:hover::after { width: 100%; }
+nav a:hover { color: var(--neon-green); }
+
+/* --- Attractive Glass Card with Hover Effect --- */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--neon-green);
+    box-shadow: 0 10px 30px rgba(0, 255, 157, 0.1);
+}
+
+/* Moving Border Animation for Cards */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, transparent, transparent, var(--neon-green));
+    animation: rotate 6s linear infinite;
+    z-index: -1;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.glass-card:hover::before { opacity: 0.3; }
+
+@keyframes rotate {
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Animated Buttons --- */
+.btn {
+    background: linear-gradient(45deg, #00ff9d, #00d4ff);
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.4);
+}
+
+.btn:hover {
+    letter-spacing: 1px;
+    box-shadow: 0 0 25px var(--neon-green);
+    transform: scale(1.05);
+}
+
+/* --- AI Floating Button Animation --- */
+.ai-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    background: var(--neon-green);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px var(--neon-green);
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 10px var(--neon-green); }
+    50% { transform: scale(1.1); box-shadow: 0 0 30px var(--neon-green); }
+    100% { transform: scale(1); box-shadow: 0 0 10px var(--neon-green); }
+}
+/

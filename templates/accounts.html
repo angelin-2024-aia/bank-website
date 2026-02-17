@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Accounts - STB Bank</title>
+    <<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="stb-login-bg">
+    <header class="stb-topbar">
+        <a href="/" class="stb-logo-container" style="text-decoration: none; color: white;">
+            <div class="stb-logo-mark">₹</div>
+            <div class="stb-logo-text"><h1>STB Bank</h1></div>
+        </a>
+        <nav class="stb-nav">
+            <a href="/">Dashboard</a>
+            <a href="/accounts">Accounts</a>
+            <a href="/transfer">Transfer</a>
+            <a href="#" style="color: #ef4444;">Logout</a>
+        </nav>
+    </header>
+
+    <main class="stb-main" style="padding: 30px 20px;">
+        <div class="stb-container">
+            <h2 style="margin-bottom: 25px; color: #1e293b;">Account Overview</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                
+                <div class="stb-account-card">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h3 style="color: #10b981;">Savings Account</h3>
+                            <p style="font-size: 14px; color: #64748b;">Acc No: XXXX-XXXX-8901</p>
+                        </div>
+                        <span style="background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">PRIMARY</span>
+                    </div>
+                    <div style="margin-top: 25px;">
+                        <p style="font-size: 14px; margin: 0;">Available Balance</p>
+                        <h1 style="margin: 5px 0; color: #1e293b;">₹ 1,25,000.00</h1>
+                    </div>
+                    <div style="margin-top: 20px; border-top: 1px solid #f1f5f9; padding-top: 15px; display: flex; gap: 10px;">
+                        <button class="stb-btn-primary" style="padding: 8px 15px; font-size: 13px;">Statements</button>
+                        <button style="padding: 8px 15px; font-size: 13px; border: 1px solid #ddd; border-radius: 5px; background: white; cursor: pointer;">Details</button>
+                    </div>
+                </div>
+
+                <div class="stb-account-card" style="opacity: 0.8;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h3 style="color: #3b82f6;">Current Account</h3>
+                            <p style="font-size: 14px; color: #64748b;">Acc No: XXXX-XXXX-4421</p>
+                        </div>
+                        <span style="background: #f1f5f9; color: #475569; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">BUSINESS</span>
+                    </div>
+                    <div style="margin-top: 25px;">
+                        <p style="font-size: 14px; margin: 0;">Available Balance</p>
+                        <h1 style="margin: 5px 0; color: #1e293b;">₹ 42,350.50</h1>
+                    </div>
+                    <div style="margin-top: 20px; border-top: 1px solid #f1f5f9; padding-top: 15px;">
+                        <button class="stb-btn-primary" style="background: #3b82f6; padding: 8px 15px; font-size: 13px;">Manage Account</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stb-account-card" style="margin-top: 30px; border-left: 5px solid #10b981;">
+                <h3 style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 20px;">🛡️</span> AI Honeypot Security Status
+                </h3>
+                <p style="font-size: 14px; color: #475569; margin-top: 10px;">
+                    Your accounts are currently protected by our **Llama 3.2 Security Shield**. 
+                    No suspicious brute-force attempts detected in the last 24 hours.
+                </p>
+                <div style="margin-top: 15px; display: flex; gap: 20px;">
+                    <div style="font-size: 13px;"><strong>Last Scan:</strong> Today, 1:40 PM</div>
+                    <div style="font-size: 13px; color: #10b981;"><strong>Status:</strong> Safe</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="ai-chat-wrapper" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;">
+        <button id="chat-toggle" style="width: 60px; height: 60px; border-radius: 50%; background: #10b981; color: white; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 24px;">💬</button>
+        <div id="chat-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 320px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid #e5e7eb; overflow: hidden;">
+            <div style="background: #1e293b; color: white; padding: 15px; font-weight: bold;">STB AI Assistant</div>
+            <div id="ai-answer-container" style="height: 250px; overflow-y: auto; padding: 15px; font-size: 13px; background: #f9fafb;">
+                Hello! Need help with your account details?
+            </div>
+            <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px;">
+                <input type="text" id="floating-question" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px;" placeholder="Ask AI...">
+                <button id="floating-send-btn" style="background: #10b981; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Loans - STB Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="stb-login-bg">
+    <header class="stb-topbar">
+        <div class="stb-logo-container">
+            <div class="stb-logo-mark">₹</div>
+            <div class="stb-logo-text"><h1>STB Bank</h1></div>
+        </div>
+        <nav class="stb-nav">
+            <a href="/">Dashboard</a>
+            <a href="/accounts">Accounts</a>
+            <a href="/loans">Loans</a>
+            <a href="#" style="color: #ef4444;">Logout</a>
+        </nav>
+    </header>
+
+    <main class="stb-main" style="padding: 30px 20px;">
+        <div class="stb-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: #1e293b; margin: 0;">Loan Management</h2>
+                <button class="stb-btn-primary">Apply for New Loan</button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                
+                <div class="stb-account-card">
+                    <div style="display: flex; justify-content: space-between;">
+                        <h3 style="color: #3b82f6; margin: 0;">Home Loan</h3>
+                        <span style="background: #eff6ff; color: #1d4ed8; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;">8.5% p.a.</span>
+                    </div>
+                    <p style="font-size: 13px; color: #64748b; margin-top: 5px;">Loan ID: L-992837</p>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 5px;">
+                            <span>Remaining Balance</span>
+                            <strong>₹ 24,50,000</strong>
+                        </div>
+                        <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                            <div style="width: 35%; height: 100%; background: #3b82f6;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 14px; color: #1e293b;">
+                        Next EMI: <strong>₹ 22,400</strong> (Mar 05, 2026)
+                    </div>
+                </div>
+
+                <div class="stb-account-card">
+                    <div style="display: flex; justify-content: space-between;">
+                        <h3 style="color: #10b981; margin: 0;">Personal Loan</h3>
+                        <span style="background: #ecfdf5; color: #047857; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;">11.2% p.a.</span>
+                    </div>
+                    <p style="font-size: 13px; color: #64748b; margin-top: 5px;">Loan ID: L-881023</p>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 5px;">
+                            <span>Remaining Balance</span>
+                            <strong>₹ 85,000</strong>
+                        </div>
+                        <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                            <div style="width: 75%; height: 100%; background: #10b981;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 14px; color: #1e293b;">
+                        Next EMI: <strong>₹ 4,200</strong> (Mar 10, 2026)
+                    </div>
+                </div>
+            </div>
+
+            <div class="stb-account-card" style="background: #1e293b; color: white;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="font-size: 30px;">🛡️</div>
+                    <div>
+                        <h3 style="margin: 0;">AI-Driven Credit Check</h3>
+                        <p style="font-size: 14px; opacity: 0.8; margin-top: 5px;">
+                            Our **Llama 3.2 Security System** ensures that your loan application is safe and verified via blockchain integrity checks.
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                    <p style="font-size: 13px; margin: 0;"><strong>Estimated Pre-approved Credit:</strong> ₹ 15,00,000</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="ai-chat-wrapper" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;">
+        <button id="chat-toggle" style="width: 60px; height: 60px; border-radius: 50%; background: #10b981; color: white; border: none; cursor: pointer; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">💬</button>
+        <div id="chat-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 320px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid #e5e7eb; overflow: hidden;">
+            <div style="background: #1e293b; color: white; padding: 15px; font-weight: bold;">STB AI Assistant</div>
+            <div id="ai-answer-container" style="height: 250px; overflow-y: auto; padding: 15px; font-size: 13px; background: #f9fafb;">
+                Hello! I can help you calculate EMIs or check your loan eligibility.
+            </div>
+            <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px;">
+                <input type="text" id="floating-question" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px;" placeholder="Ask AI about loans...">
+                <button id="floating-send-btn" style="background: #10b981; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

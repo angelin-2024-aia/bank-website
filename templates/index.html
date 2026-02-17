@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>STB Bank | Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo"><h2>STB <span style="color:white">BANK</span></h2></div>
+        <nav>
+            <a href="#">Technology</a>
+            <a href="/contact">Support</a>
+            <a href="{{ url_for('login') }}" class="btn" style="text-decoration:none; padding: 10px 25px;">Sign In</a>
+        </nav>
+    </header>
+
+    <main class="container" style="text-align: center; margin-top: 100px;">
+        <h1 class="glow-text" style="font-size: 3.5rem;">Secure Your Assets with AI</h1>
+        <p style="color: #94a3b8;">Experience the next generation of banking protected by Llama 3.2.</p>
+        
+        <div style="margin-top: 50px;">
+            <a href="{{ url_for('login') }}" class="btn" style="text-decoration:none;">Get Started</a>
+        </div>
+    </main>
+</body>
+</html>

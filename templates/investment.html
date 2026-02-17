@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Investments | STB Bank</title>
+</head>
+<body>
+    <header>
+        <div class="logo"><h2>STB BANK</h2></div>
+        <nav>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/accounts">Accounts</a>
+            <a href="/investment" style="color: var(--neon-green);">Investments</a>
+            <a href="/settings">Settings</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="glass-card">
+            <h1 style="font-family: 'Orbitron'; color: var(--neon-green);">INVESTMENT PRODUCTS</h1>
+            <p style="color: #94a3b8;">Grow your wealth with AI-monitored investment solutions.</p>
+
+            <h3 style="margin-top: 30px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">Fixed Deposits</h3>
+            <table style="width: 100%; text-align: left; margin-top: 10px; border-collapse: collapse;">
+                <tr style="color: var(--neon-green); font-size: 12px;">
+                    <th>AMOUNT</th><th>RATE</th><th>TENURE</th><th>MATURITY</th>
+                </tr>
+                <tr><td>₹ 5,00,000</td><td>5.5%</td><td>5 Years</td><td>05 Jan 2031</td></tr>
+                <tr><td>₹ 2,00,000</td><td>5.2%</td><td>3 Years</td><td>05 Jan 2029</td></tr>
+            </table>
+
+            <h3 style="margin-top: 40px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">Mutual Funds Portfolio</h3>
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                <span style="font-size: 14px;">Current Value:</span>
+                <h2 style="margin: 5px 0;">₹ 8,50,000 <span style="font-size: 14px; color: var(--neon-green);">+12.5% ↑</span></h2>
+            </div>
+            <button class="btn" style="width: auto;">Explore New Funds</button>
+        </div>
+    </main>
+</body>
+</html>

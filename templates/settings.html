@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - STB Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="stb-login-bg">
+    <header class="stb-topbar">
+        <div class="stb-logo-container">
+            <div class="stb-logo-mark">₹</div>
+            <div class="stb-logo-text"><h1>STB Bank</h1></div>
+        </div>
+        <nav class="stb-nav">
+            <a href="/">Dashboard</a>
+            <a href="/accounts">Accounts</a>
+            <a href="/settings">Settings</a>
+            <a href="#" style="color: #ef4444;">Logout</a>
+        </nav>
+    </header>
+
+    <main class="stb-main" style="padding: 30px 20px;">
+        <div class="stb-container" style="max-width: 800px; margin: 0 auto;">
+            <h2 style="color: #1e293b; margin-bottom: 25px;">Account Settings</h2>
+
+            <section class="stb-account-card" style="margin-bottom: 25px;">
+                <h3 style="margin-top: 0; color: #1e293b;">👤 Profile Information</h3>
+                <form class="stb-form" style="margin-top: 20px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="stb-form-group">
+                            <label style="font-size: 13px; color: #64748b;">Full Name</label>
+                            <input type="text" value="Premium User" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; margin-top:5px;">
+                        </div>
+                        <div class="stb-form-group">
+                            <label style="font-size: 13px; color: #64748b;">Email Address</label>
+                            <input type="email" value="user@stbbank.com" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; margin-top:5px;">
+                        </div>
+                    </div>
+                    <button type="button" class="stb-btn-primary" style="margin-top: 20px; padding: 10px 25px;">Update Profile</button>
+                </form>
+            </section>
+
+            <section class="stb-account-card" style="margin-bottom: 25px; border-left: 5px solid #10b981;">
+                <h3 style="margin-top: 0; color: #1e293b;">🤖 AI Security Shield (Llama 3.2)</h3>
+                <p style="font-size: 14px; color: #64748b;">Configure how the AI Honeypot protects your account.</p>
+                
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f5f9;">
+                        <div>
+                            <strong>Brute-force Honeypot</strong>
+                            <p style="margin:0; font-size: 12px; color: #94a3b8;">Create decoy login screens for suspicious IPs.</p>
+                        </div>
+                        <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: #10b981;">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+                        <div>
+                            <strong>RAG Engine Sensitivity</strong>
+                            <p style="margin:0; font-size: 12px; color: #94a3b8;">Adjust how strictly the AI monitors transaction patterns.</p>
+                        </div>
+                        <select style="padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+                            <option>Standard</option>
+                            <option selected>High (Recommended)</option>
+                            <option>Paranoid</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stb-account-card" style="border: 1px solid #fecaca;">
+                <h3 style="margin-top: 0; color: #ef4444;">🚨 Danger Zone</h3>
+                <p style="font-size: 14px; color: #64748b;">Actions here cannot be undone.</p>
+                <div style="display: flex; gap: 15px; margin-top: 20px;">
+                    <button style="background: white; border: 1px solid #ef4444; color: #ef4444; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">Deactivate Account</button>
+                    <button style="background: #ef4444; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">Freeze All Cards</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="ai-chat-wrapper" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;">
+        <button id="chat-toggle" style="width: 60px; height: 60px; border-radius: 50%; background: #10b981; color: white; border: none; cursor: pointer; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">💬</button>
+        <div id="chat-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 320px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid #e5e7eb; overflow: hidden;">
+            <div style="background: #1e293b; color: white; padding: 15px; font-weight: bold;">STB AI Assistant</div>
+            <div id="ai-answer-container" style="height: 250px; overflow-y: auto; padding: 15px; font-size: 13px; background: #f9fafb;">
+                Settings-la ethavadhu help venuma?
+            </div>
+            <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px;">
+                <input type="text" id="floating-question" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px;" placeholder="Ask AI...">
+                <button id="floating-send-btn" style="background: #10b981; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

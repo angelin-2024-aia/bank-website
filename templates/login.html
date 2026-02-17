@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Access | STB Bank</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap');
+
+        :root {
+            --neon-green: #00ff9d;
+            --bg-dark: #020617;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            font-family: 'Inter', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 45px 40px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .neon-text {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px rgba(0, 255, 157, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Input Alignment Fix */
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            color: var(--neon-green);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            box-sizing: border-box; /* Labels overlap aagaama thadukkum */
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--neon-green);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00ff9d, #059669);
+            border: none;
+            border-radius: 8px;
+            color: #020617;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px var(--neon-green);
+        }
+
+        .security-footer {
+            margin-top: 30px;
+            font-size: 11px;
+            color: #64748b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shield-icon {
+            color: var(--neon-green);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2 class="neon-text">SECURE ACCESS</h2>
+        <p class="subtitle">STB Bank Identity Portal</p>
+        
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="customer_id">CUSTOMER ID</label>
+                <input type="text" id="customer_id" name="customer_id" placeholder="Enter ID" required autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">PASSWORD</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit" class="login-btn">LOGIN TO PORTAL</button>
+        </form>
+        
+        <div class="security-footer">
+            <span class="shield-icon">🛡️</span> AI Honeypot Monitoring Active
+        </div>
+    </div>
+
+</body>
+</html>
