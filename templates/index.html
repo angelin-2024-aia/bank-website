@@ -2,26 +2,183 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>STB Bank | Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>STB Bank | AI Secured</title>
+    <style>
+        /* Modern Dark Theme Design */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050a14; /* Deep Black/Blue */
+            color: #e2e8f0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            overflow-x: hidden;
+            transition: background 0.5s;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .logo h2 {
+            color: #10b981; /* Neon Green */
+            letter-spacing: 2px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: #10b981; }
+
+        .btn-signin {
+            background: #10b981;
+            color: #050a14;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-top: 120px;
+            padding: 0 20px;
+        }
+
+        .glow-text {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .sub-text {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-main {
+            padding: 15px 35px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: #050a14;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: #1e293b;
+            color: white;
+            border: 1px solid #334155;
+        }
+
+        .btn-main:hover { transform: translateY(-3px); opacity: 0.9; }
+
+        /* Security Alert Banner */
+        #security-alert {
+            display: none;
+            background: #ef4444;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .lockdown { background-color: #1a0505 !important; }
+    </style>
 </head>
-<body>
+<body id="main-body">
+
+    <div id="security-alert">⚠️ UNAUTHORIZED SYSTEM ACCESS DETECTED - ALL OPERATIONS SUSPENDED</div>
+
     <header>
-        <div class="logo"><h2>STB <span style="color:white">BANK</span></h2></div>
+        <div class="logo"><h2>STB BANK</h2></div>
         <nav>
             <a href="#">Technology</a>
-            <a href="/contact">Support</a>
-            <a href="{{ url_for('login') }}" class="btn" style="text-decoration:none; padding: 10px 25px;">Sign In</a>
+            <a href="#">Support</a>
+            <a href="login.html" class="btn-signin">Sign In</a>
         </nav>
     </header>
 
-    <main class="container" style="text-align: center; margin-top: 100px;">
-        <h1 class="glow-text" style="font-size: 3.5rem;">Secure Your Assets with AI</h1>
-        <p style="color: #94a3b8;">Experience the next generation of banking protected by Llama 3.2.</p>
+    <main class="hero">
+        <h1 id="hero-text" class="glow-text">Secure Your Assets with AI</h1>
+        <p id="sub-text" class="sub-text">
+            Experience the next generation of banking protected by Llama 3.2.<br>
+            RAG-based security and real-time honeypot monitoring.
+        </p>
         
-        <div style="margin-top: 50px;">
-            <a href="{{ url_for('login') }}" class="btn" style="text-decoration:none;">Get Started</a>
+        <div class="cta-buttons">
+            <a href="http://172.16.125.132:8000/login" id="get-started-btn" class="btn-main btn-primary">Get Started</a>
+            <a href="security_docs.html" class="btn-main btn-secondary">View Security Docs</a>
         </div>
     </main>
+
+    <script>
+        // MUKKIYAM: Madhu-voda Laptop IP-ah inga update pannunga
+        const MADHU_IP = "172.31.145.94"; 
+        const ML_API = `http://${MADHU_IP}:8000/status`; 
+
+        function updateHoneypotStatus() {
+            fetch(ML_API)
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "ATTACK") {
+                    document.getElementById("security-alert").style.display = "block";
+                    document.getElementById("main-body").classList.add("lockdown");
+                    document.getElementById("hero-text").innerHTML = "SYSTEM UNDER LOCKDOWN";
+                    document.getElementById("hero-text").style.color = "#ef4444";
+                    document.getElementById("sub-text").innerHTML = "Breach detected. Forensic protocols initiated. Redirecting for security check...";
+                    
+                    // Disabling buttons
+                    document.querySelectorAll('.btn-main, .btn-signin').forEach(el => {
+                        el.style.background = "#334155";
+                        el.style.pointerEvents = "none";
+                    });
+
+                    // Redirecting after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = "fake_dashboard.html";
+                    }, 3000);
+                }
+            })
+            .catch(err => console.log("Shield Active: Monitoring network..."));
+        }
+
+        setInterval(updateHoneypotStatus, 3000);
+    </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 STB Bank Security Features:
-1. Multi-Factor Authentication: Uses CAPTCHA and password-based login to prevent automated bots.
+1. Multi-Factor Authepntication: Uses CAPTCHA and password-based login to prevent automated bots.
 2. Military-Grade Encryption: All data transmissions are simulated as 256-bit SSL encrypted.
 3. Real-Time Attack Detection: The system polls for attack logs every 5 seconds.
 4. Transaction Lockdown: If an anomaly or attack is detected, the 'Submit Transfer' button is automatically disabled to prevent simulated fraud.

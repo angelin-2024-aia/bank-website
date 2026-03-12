@@ -3,3 +3,4 @@ This is a sophisticated cyber-security honeypot disguised as a banking portal (S
 The system is designed to lure attackers and study their behavior. 
 It features a real-time monitoring dashboard, a CAPTCHA-protected login, and a fund transfer simulation. 
 The backend is built with Flask, and the AI Assistant uses RAG (Retrieval-Augmented Generation) with Ollama llama3.2 to provide security insights.
+home loan approval process
