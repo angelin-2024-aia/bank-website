@@ -1,0 +1,39 @@
+﻿{% extends "base.html" %}
+{% block title %}Statements | STB Bank{% endblock %}
+{% block content %}
+<main class="container" style="max-width:900px;">
+    <h2 style="color:var(--neon-green);margin-bottom:24px;">Account Statements</h2>
+    <div class="glass-card" style="padding:30px;">
+        <h3 style="margin-bottom:18px;color:var(--neon-green);">All Transactions</h3>
+        {% if transactions %}
+        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+            <thead>
+                <tr style="color:#64748b;font-size:11px;text-transform:uppercase;">
+                    <th style="text-align:left;padding:8px 0;">To Account</th>
+                    <th style="text-align:left;padding:8px 0;">Note</th>
+                    <th style="text-align:right;padding:8px 0;">Amount</th>
+                    <th style="text-align:right;padding:8px 0;">Date</th>
+                    <th style="text-align:right;padding:8px 0;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for t in transactions %}
+            <tr style="border-top:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:12px 0;color:white;">{{ t.to_account }}</td>
+                <td style="padding:12px 0;color:#94a3b8;">{{ t.note or "—" }}</td>
+                <td style="padding:12px 0;text-align:right;color:#ef4444;">−₹{{ "{:,.2f}".format(t.amount) }}</td>
+                <td style="padding:12px 0;text-align:right;color:#64748b;font-size:12px;">{{ t.ts_utc.strftime("%d %b %Y %H:%M") }}</td>
+                <td style="padding:12px 0;text-align:right;color:#10b981;font-size:12px;">{{ t.status }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="color:#64748b;">No transactions found.</p>
+        {% endif %}
+        <div style="margin-top:20px;">
+            <a href="{{ url_for('accounts') }}" style="color:#94a3b8;font-size:13px;">← Back to Accounts</a>
+        </div>
+    </div>
+</main>
+{% endblock %}

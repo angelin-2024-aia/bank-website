@@ -1,3 +1,9 @@
 flask
 flask-cors
+flask-sqlalchemy
+flask-login
+requests
+scikit-learn
+numpy
+werkzeug
 ollama

@@ -1,129 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Cards - STB Bank</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        /* Card-specific visual effects */
-        .credit-card-ui {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .card-number {
-            font-size: 20px;
-            letter-spacing: 3px;
-            margin: 20px 0;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .card-chip {
-            width: 45px;
-            height: 35px;
-            background: #facc15;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body class="stb-login-bg">
-    <header class="stb-topbar">
-        <a href="/" class="stb-logo-container" style="text-decoration: none; color: white;">
-            <div class="stb-logo-mark">₹</div>
-            <div class="stb-logo-text"><h1>STB Bank</h1></div>
-        </a>
-        <nav class="stb-nav">
-            <a href="/">Dashboard</a>
-            <a href="/accounts">Accounts</a>
-            <a href="/cards">Cards</a>
-            <a href="#" style="color: #ef4444;">Logout</a>
-        </nav>
-    </header>
+﻿{% extends "base.html" %}
+{% block title %}Cards | STB Bank{% endblock %}
+{% block content %}
+<main style="max-width:1000px;margin:30px auto;padding:0 20px;">
+    <h2 style="color:#00ff9d;margin-bottom:24px;">Your Cards</h2>
 
-    <main class="stb-main" style="padding: 30px 20px;">
-        <div class="stb-container">
-            <h2 style="margin-bottom: 25px; color: #1e293b;">Your Cards</h2>
+    {% if request.args.get("msg") %}
+    {% set parts = request.args.get("msg").split(":") %}
+    <div style="padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:13px;
+        {% if parts[0]=='success' %}background:rgba(16,185,129,0.12);border:1px solid #10b981;color:#10b981;
+        {% else %}background:rgba(239,68,68,0.12);border:1px solid #ef4444;color:#ef4444;{% endif %}">
+        {{ parts[1] if parts|length > 1 else parts[0] }}
+    </div>
+    {% endif %}
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
-                
-                <section>
-                    <div class="credit-card-ui">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>STB Platinum</span>
-                            <span style="font-style: italic; font-weight: bold;">VISA</span>
-                        </div>
-                        <div class="card-chip"></div>
-                        <div class="card-number">XXXX XXXX XXXX 8901</div>
-                        <div style="display: flex; justify-content: space-between; font-size: 12px;">
-                            <div>
-                                <p style="margin:0; opacity: 0.7;">CARD HOLDER</p>
-                                <p style="margin:0; font-size: 14px;">PREMIUM USER</p>
-                            </div>
-                            <div style="text-align: right;">
-                                <p style="margin:0; opacity: 0.7;">EXPIRES</p>
-                                <p style="margin:0; font-size: 14px;">12/28</p>
-                            </div>
-                        </div>
-                    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;">
+        <div>
+            <div style="background:linear-gradient(135deg,#1e293b,#334155);padding:28px;border-radius:18px;margin-bottom:16px;">
+                <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+                    <span style="color:#94a3b8;">STB Platinum</span>
+                    <span style="font-style:italic;font-weight:bold;color:white;font-size:18px;">VISA</span>
+                </div>
+                <div style="width:44px;height:34px;background:#facc15;border-radius:5px;margin-bottom:20px;"></div>
+                <p style="font-size:20px;letter-spacing:4px;font-family:monospace;color:white;margin:0 0 20px;">XXXX XXXX XXXX 8901</p>
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:#94a3b8;">
+                    <div><p style="margin:0;opacity:0.6;">CARD HOLDER</p><p style="margin:2px 0 0;color:white;">{{ current_user.customer_id | upper }}</p></div>
+                    <div style="text-align:right;"><p style="margin:0;opacity:0.6;">EXPIRES</p><p style="margin:2px 0 0;color:white;">12/28</p></div>
+                </div>
+            </div>
 
-                    <div class="stb-account-card">
-                        <h4 style="margin-top: 0;">Card Settings</h4>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; font-size: 14px;">
-                            <span>Online Transactions</span>
-                            <span style="color: #10b981; font-weight: bold;">ENABLED</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 14px;">
-                            <span>International Usage</span>
-                            <span style="color: #ef4444; font-weight: bold;">DISABLED</span>
-                        </div>
-                        <button class="stb-btn-primary" style="width: 100%; margin-top: 20px; font-size: 13px;">Manage PIN</button>
-                    </div>
-                </section>
-
-                <section>
-                    <div class="stb-account-card" style="height: 100%; border-top: 5px solid #1e293b;">
-                        <h3 style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 20px;">🛡️</span> Card Security
-                        </h3>
-                        <p style="font-size: 14px; color: #64748b; margin-top: 15px; line-height: 1.6;">
-                            Our **AI Honeypot system** monitors for unauthorized card cloning attempts. If we detect a brute-force attack on your CVV or PIN, the card will be automatically frozen.
-                        </p>
-                        
-                        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-top: 20px;">
-                            <h4 style="margin: 0; font-size: 14px;">Security Model: Llama 3.2</h4>
-                            <p style="font-size: 12px; color: #64748b; margin-top: 5px;">Active monitoring for pattern-based fraud detection.</p>
-                        </div>
-
-                        <button style="width: 100%; margin-top: 25px; padding: 12px; border: 2px solid #ef4444; color: #ef4444; background: white; border-radius: 5px; font-weight: bold; cursor: pointer;">
-                            BLOCK CARD PERMANENTLY
-                        </button>
-                    </div>
-                </section>
-
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;">
+                <h4 style="margin-top:0;">Card Settings</h4>
+                <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:12px;">
+                    <span style="color:#94a3b8;">Online Transactions</span>
+                    <span style="color:#00ff9d;font-weight:600;">ENABLED</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:20px;">
+                    <span style="color:#94a3b8;">International Usage</span>
+                    <span style="color:#ef4444;font-weight:600;">DISABLED</span>
+                </div>
+                <button onclick="document.getElementById('pin-form').style.display=document.getElementById('pin-form').style.display==='none'?'block':'none'" class="btn" style="width:100%;font-size:13px;">Manage PIN</button>
+                <div id="pin-form" style="display:none;margin-top:16px;">
+                    <form method="POST" action="/change-pin">
+                        <input type="password" name="old_pin" placeholder="Current Password" required style="width:100%;padding:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:white;border-radius:8px;margin-bottom:8px;box-sizing:border-box;">
+                        <input type="password" name="new_pin" placeholder="New Password" required style="width:100%;padding:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:white;border-radius:8px;margin-bottom:8px;box-sizing:border-box;">
+                        <button type="submit" class="btn" style="width:100%;font-size:13px;">CONFIRM CHANGE</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </main>
 
-    <div id="ai-chat-wrapper" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;">
-        <button id="chat-toggle" style="width: 60px; height: 60px; border-radius: 50%; background: #10b981; color: white; border: none; cursor: pointer; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">💬</button>
-        <div id="chat-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 320px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid #e5e7eb; overflow: hidden;">
-            <div style="background: #1e293b; color: white; padding: 15px; font-weight: bold;">STB AI Assistant</div>
-            <div id="ai-answer-container" style="height: 250px; overflow-y: auto; padding: 15px; font-size: 13px; background: #f9fafb;">
-                How can I help you with your card security?
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;">
+            <h3 style="margin-top:0;">🛡️ Card Security</h3>
+            <p style="font-size:14px;color:#94a3b8;line-height:1.7;margin:16px 0;">Our AI Honeypot monitors for unauthorized card cloning and CVV brute-force attempts.</p>
+            <div style="background:rgba(255,255,255,0.04);padding:16px;border-radius:10px;margin-bottom:20px;">
+                <h4 style="margin:0 0 6px;font-size:14px;">Security Model: Llama 3.2</h4>
+                <p style="font-size:12px;color:#64748b;margin:0;">Active pattern-based fraud detection.</p>
             </div>
-            <div style="padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px;">
-                <input type="text" id="floating-question" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px;" placeholder="Ask AI...">
-                <button id="floating-send-btn" style="background: #10b981; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Send</button>
-            </div>
+            <form method="POST" action="/block-card">
+                <button type="submit" style="width:100%;padding:12px;border:2px solid #ef4444;color:#ef4444;background:transparent;border-radius:8px;font-weight:bold;cursor:pointer;">BLOCK CARD PERMANENTLY</button>
+            </form>
         </div>
     </div>
-
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
-</body>
-</html>
+</main>
+{% endblock %}

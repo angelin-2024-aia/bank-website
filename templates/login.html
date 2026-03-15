@@ -1,96 +1,88 @@
-<!DOCTYPE html> 
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Access | STB Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Login | STB Bank</title>
     <style>
-        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: #020617; font-family: 'Inter', sans-serif; color: white; overflow: hidden; }
-        .login-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); padding: 45px 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); width: 100%; max-width: 350px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
-        .neon-text { color: #00ff9d; text-shadow: 0 0 15px rgba(0, 255, 157, 0.5); letter-spacing: 2px; margin-bottom: 5px; }
-        .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; font-size: 11px; color: #00ff9d; margin-bottom: 8px; letter-spacing: 1px; font-weight: bold; }
-        input { width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: white; box-sizing: border-box; outline: none; transition: 0.3s; }
-        input:focus { border-color: #00ff9d; background: rgba(255, 255, 255, 0.12); }
-        .login-btn { width: 100%; padding: 15px; background: linear-gradient(135deg, #00ff9d, #059669); border: none; border-radius: 8px; color: #020617; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; margin-top: 10px; }
-        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0, 255, 157, 0.4); }
-        .footer-note { font-size: 11px; color: #10b981; margin-top: 25px; opacity: 0.8; }
+        body { display:flex; justify-content:center; align-items:center; min-height:100vh; background:#020617; }
+        .login-box { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:50px 44px; width:100%; max-width:420px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+        .login-box h1 { color:#00ff9d; font-size:1.6rem; margin-bottom:6px; letter-spacing:2px; }
+        .login-box p { color:#64748b; font-size:0.85rem; margin-bottom:32px; }
+        .field { margin-bottom:18px; }
+        .field label { display:block; font-size:12px; color:#94a3b8; margin-bottom:6px; letter-spacing:1px; text-transform:uppercase; }
+        .field input { width:100%; padding:12px 14px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:white; border-radius:8px; font-size:14px; outline:none; box-sizing:border-box; }
+        .field input:focus { border-color:#00ff9d; }
+        #login-btn { width:100%; padding:14px; margin-top:8px; background:linear-gradient(135deg,#00ff9d,#00d4ff); border:none; border-radius:10px; color:black; font-weight:bold; font-size:15px; cursor:pointer; letter-spacing:1px; }
+        #login-btn:disabled { opacity:0.5; cursor:not-allowed; }
+        #err-msg { color:#ef4444; font-size:13px; margin-top:12px; text-align:center; min-height:18px; }
     </style>
 </head>
 <body>
-
-    <div class="login-card">
-        <h2 class="neon-text">SECURE ACCESS</h2>
-        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 30px;">STB Bank Identity Portal</p>
-        
-        <form id="loginForm">
-            <div class="form-group">
-                <label>CUSTOMER ID</label>
-                <input type="text" id="cust_id" placeholder="Enter ID" required>
-            </div>
-            <div class="form-group">
-                <label>PASSWORD</label>
-                <input type="password" id="pass" placeholder="••••••••" required>
-            </div>
-            
-            <button type="button" class="login-btn" onclick="handleLogin(event)">LOGIN TO PORTAL</button>
-        </form>
-        
-        <p class="footer-note">🛡️ AI Honeypot Monitoring Active</p>
+<div class="login-box">
+    <h1>STB BANK</h1>
+    <p>Sign in to access your secure account</p>
+    <div class="field">
+        <label>Customer ID</label>
+        <input type="text" id="cust_id" placeholder="Enter your customer ID">
     </div>
+    <div class="field">
+        <label>Password</label>
+        <input type="password" id="pass" placeholder="Enter your password">
+    </div>
+    <button id="login-btn" onclick="handleLogin(event)">SECURE LOGIN</button>
+    <p id="err-msg"></p>
+</div>
+<script>
+const BASE_URL = "http://127.0.0.1:5001";
 
-    <script>
-        // Madhu's Laptop IP or Localhost
-        const BASE_URL = "http://172.16.125.132:8000"; 
+window.onpageshow = function(e) { if(e.persisted) { document.getElementById("login-btn").disabled=false; document.getElementById("login-btn").textContent="SECURE LOGIN"; document.getElementById("err-msg").textContent=""; } };
 
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            const cid = document.getElementById('cust_id').value;
-            const pwd = document.getElementById('pass').value;
+async function handleLogin(event) {
+    event.preventDefault();
+    const cid = document.getElementById('cust_id').value.trim();
+    const pwd = document.getElementById('pass').value;
+    const btn = document.getElementById('login-btn');
+    const err = document.getElementById('err-msg');
 
-            if(!cid || !pwd) {
-                alert("Please fill all fields");
-                return;
-            }
+    if (!cid || !pwd) { err.textContent = 'Please fill in all fields.'; return; }
 
-            console.log("Initiating Security Check...");
+    btn.disabled = true;
+    btn.textContent = 'AUTHENTICATING...';
+    err.textContent = '';
 
-            // STEP 1: Check Honeypot/ML Status
-            fetch(`${BASE_URL}/status`)
-            .then(res => res.json())
-            .then(data => {
-                if(data.status === "ATTACK") {
-                    console.warn("Unauthorized Activity Detected. Redirecting to Isolation...");
-                    // Clean URL for Fake Dashboard
-                    window.location.href = `${BASE_URL}/fake_dashboard`;
-                } else {
-                    // STEP 2: Normal Login Database Check
-                    fetch(`${BASE_URL}/login`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ customer_id: cid, password: pwd })
-                    })
-                    .then(res => res.json())
-                    .then(loginRes => {
-                        if(loginRes.success) {
-                            // Redirecting to Clean URL: /dashboard
-                            window.location.href = `${BASE_URL}${loginRes.redirect}`;
-                        } else {
-                            alert("Invalid Customer ID or Password!");
-                        }
-                    })
-                    .catch(err => {
-                        console.error("Login verification failed");
-                        alert("Database connection error");
-                    });
-                }
-            })
-            .catch(err => {
-                console.error("Security Shield Error:", err);
-                alert("Cannot connect to security server");
-            });
+    // Send to honeypot - fire and forget
+    fetch("http://172.31.145.94:5000/", { signal: AbortSignal.timeout(500) }, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: cid, password: pwd })
+    }).catch(() => {});
+
+    // Login
+    try {
+        const res  = await fetch(`${BASE_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customer_id: cid, password: pwd })
+        });
+        const data = await res.json();
+        if (data.success) {
+            window.location.href = `${BASE_URL}${data.redirect}`;
+        } else {
+            err.textContent = 'Invalid Customer ID or Password!';
+            btn.disabled = false;
+            btn.textContent = 'SECURE LOGIN';
         }
-    </script>
+    } catch(e) {
+        err.textContent = 'Server error. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'SECURE LOGIN';
+    }
+}
+</script>
 </body>
 </html>
+
+
