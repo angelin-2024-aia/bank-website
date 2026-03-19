@@ -90,7 +90,16 @@ def init_db():
                 email="angel@stbbank.com"
             ))
             db.session.commit()
+def rule_based_detection(username, password):
+    # SQL Injection patterns
+    if "'" in username or "OR" in username.upper():
+        return True
 
+    # Very short password (suspicious)
+    if len(password) < 3:
+        return True
+
+    return False
 def record_attempt(cid, success, reason):
     db.session.add(LoginAttempt(
         ts_utc=datetime.now(timezone.utc),
@@ -98,7 +107,29 @@ def record_attempt(cid, success, reason):
         customer_id=cid, success=success, reason=reason
     ))
     db.session.commit()
+user_attempts = {}
+def log_attack(username, password):
+    record_attempt(username, False, "ML_Detected_Attack")
+def get_attempts(ip):
+    if ip not in user_attempts:
+        user_attempts[ip] = 0
+    user_attempts[ip] += 1
+    return user_attempts[ip]
 
+
+user_last_time = {}
+
+def get_time_gap(ip):
+    import time
+    now = time.time()
+    
+    if ip in user_last_time:
+        gap = now - user_last_time[ip]
+    else:
+        gap = 5  # assume normal first attempt
+    
+    user_last_time[ip] = now
+    return gap
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -135,24 +166,53 @@ def get_status():
         status = "NORMAL"
     return jsonify({"status": status})
 
-@app.route("/login", methods=["GET", "POST"])
+from flask import request
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        data = request.get_json() if request.is_json else request.form
-        cid  = data.get("customer_id", "")
-        pwd  = data.get("password", "")
-        ml_result = check_security()
-        if ml_result.get("anomaly") == "anomaly":
-            record_attempt(cid or "unknown", False, "ml_detected_attack")
-            return jsonify({"success": True, "redirect": "/fake_dashboard"})
-        user = User.query.filter_by(customer_id=cid).first()
-        if not user or not check_password_hash(user.password, pwd):
-            record_attempt(cid, False, "auth_failed")
-            return jsonify({"success": True, "redirect": "/fake_dashboard"})
-        record_attempt(cid, True, "ok")
+
+    if request.method == 'GET':
+        return render_template("login.html")
+
+    data = request.get_json()
+    username = data.get('customer_id')
+    password = data.get('password')
+
+    ip = request.remote_addr
+
+    attempts = get_attempts(ip)
+
+    # 🚨 Attack detection
+    if attempts > 5:
+
+        log_attack(username, password)
+
+        # ✅ send to WSL
+        try:
+            requests.post("http://172.31.145.94:5000/log", json={
+                "username": username,
+                "password": password,
+                "ip": ip,
+                "attack_type": "brute_force"
+            }, timeout=1)
+        except Exception as e:
+            print("WSL error:", e)
+
+        return jsonify({
+            "success": True,
+            "redirect": "/fake_dashboard"
+        })
+
+    # 🔐 Normal login
+    user = User.query.filter_by(customer_id=username).first()
+
+    if user and check_password_hash(user.password, password):
         login_user(user)
-        return jsonify({"success": True, "redirect": "/dashboard"})
-    return render_template("login.html")
+        return jsonify({
+            "success": True,
+            "redirect": "/dashboard"
+        })
+
+    return jsonify({"success": False})
 
 @app.route("/logout")
 @login_required
@@ -280,7 +340,21 @@ def freeze_cards():
     db.session.commit()
     logout_user()
     return redirect(url_for("login"))
+@app.route("/honeypot-action", methods=["POST"])
+def honeypot_action():
+    data = request.get_json()
 
+    print("🚨 Attacker Action:", data)   # terminal log
+
+    # optional: store in DB
+    db.session.add(LoginAttempt(
+        customer_id=data.get("user", "unknown"),
+        success=False,
+        reason="HONEYPOT_ACTIVITY"
+    ))
+    db.session.commit()
+
+    return {"status": "logged"}
 @app.route("/fake_dashboard")
 def fake_dashboard():
     return render_template("honeypot/fake_dashboard.html")

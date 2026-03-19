@@ -53,13 +53,21 @@ async function handleLogin(event) {
     btn.textContent = 'AUTHENTICATING...';
     err.textContent = '';
 
-    // Send to honeypot - fire and forget
-    fetch("http://172.31.145.94:5000/", { signal: AbortSignal.timeout(500) }, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: cid, password: pwd })
-    }).catch(() => {});
+    // 🔥 Send to honeypot (CORRECT)
+    console.log("Sending honeypot...");
 
+    fetch("http://172.31.145.94:5000/log", {
+           method: "POST",
+           headers: {
+              "Content-Type": "application/json"
+           },
+           body: JSON.stringify({
+               username: cid,
+               password: pwd,
+               ip: "127.0.0.1",
+               attack_type: "login_attempt"
+           })
+    }).catch(() => {});
     // Login
     try {
         const res  = await fetch(`${BASE_URL}/login`, {

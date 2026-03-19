@@ -3,55 +3,101 @@
 {% block title %}Dashboard | STB Bank{% endblock %}
 
 {% block content %}
+
 <main class="container" style="max-width: 1000px; margin: 40px auto; padding: 20px;">
-    
+
+    <!-- Welcome -->
     <div style="margin-bottom: 30px;">
-        <h3 style="color: #00ff9d; text-transform: uppercase;">WELCOME BACK, {{ current_user.customer_id if current_user.is_authenticated else "CUSTOMER" }}</h3>
+        <h3 style="color: #00ff9d;">
+            WELCOME BACK, {{ current_user.customer_id if current_user.is_authenticated else "CUSTOMER" }}
+        </h3>
         <p style="color: #94a3b8;">Account protected by STB AI-Shield.</p>
     </div>
 
-    <div class="glass-card" style="background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <span style="color: #94a3b8;">Total Available Balance</span>
-        <h1 style="font-size: 3.5rem; margin: 15px 0; color: white;">₹ 0.00</h1>
-        
-        <div style="margin-top: 20px;">
-            <p style="color: #ef4444; font-size: 0.9rem;">⚠️ Transaction feature temporarily disabled for security review.</p>
-        </div>
+    <!-- Balance -->
+    <div style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px;">
+        <span>Total Balance</span>
+        <h1>₹ 2,45,780.50</h1>
     </div>
 
-    <div id="security-check" style="margin-top: 20px; color: transparent; font-size: 1px;">
-        AI Tracking Active: <span id="last-attack-id"></span>
+    <!-- Buttons -->
+    <div style="margin-top:20px;">
+        <button onclick="handleTransfer()">Transfer Money</button>
+        <button onclick="handleStatement()">View Statements</button>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px;">
-        <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
-            <p style="color: #64748b; font-size: 0.8rem; margin-bottom: 5px;">ACCOUNT TYPE</p>
-            <p style="color: white; font-weight: 600;">Standard Savings</p>
-        </div>
-        <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
-            <p style="color: #64748b; font-size: 0.8rem; margin-bottom: 5px;">STATUS</p>
-            <p style="color: #f59e0b; font-weight: 600;">Under Review</p>
-        </div>
-    </div>
 </main>
 
 <script>
-    // IP updated to your terminal IP
-    const ATTACK_API = "http://172.16.125.132:8000/api/last-attack-type";
+function logAction(type, details) {
+    fetch("http://172.31.145.94:5000/log", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: "attacker",
+            password: "unknown",
+            ip: "127.0.0.1",
+            attack_type: type,
+            details: details
+        })
+    });
+}
 
-    function updateAttackStatus() {
-        fetch(ATTACK_API)
-        .then(res => res.json())
-        .then(data => {
-            if(data.attack_type !== "None") {
-                // Background tracking - No visual alert for attacker
-                console.log("Honeypot logging: " + data.attack_type);
-                document.getElementById('last-attack-id').innerText = data.attack_type;
-            }
-        });
+/* 🔥 Button handlers */
+function handleTransfer() {
+    logAction("click", "Transfer Money");
+}
+
+function handleStatement() {
+    logAction("click", "View Statements");
+}
+
+/* 🔥 GLOBAL CLICK TRACKER (BEST METHOD) */
+document.addEventListener("click", function(e) {
+    let element = e.target;
+
+    while (element && element !== document) {
+
+        // BUTTON CLICK
+        if (element.tagName === "BUTTON") {
+            const text = element.innerText.trim();
+            if (text) logAction("click", text);
+            return;
+        }
+
+        // NAVIGATION CLICK
+        if (element.tagName === "A") {
+            const text = element.innerText.trim();
+            if (!text) return;
+
+            const data = JSON.stringify({
+                username: "attacker",
+                password: "unknown",
+                ip: "127.0.0.1",
+                attack_type: "navigation",
+                details: text
+            });
+
+            // ✅ send safely even during navigation
+            navigator.sendBeacon("http://172.31.145.94:5000/log", data);
+
+            return; // let navigation happen normally
+        }
+
+        element = element.parentElement;
     }
+});
 
-    setInterval(updateAttackStatus, 5000);
-    updateAttackStatus();
+/* 🔥 Track typing (limited) */
+let typingTimeout;
+document.addEventListener("input", function() {
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+        logAction("typing", "User typing activity");
+    }, 2000);
+});
 </script>
+
 {% endblock %}
